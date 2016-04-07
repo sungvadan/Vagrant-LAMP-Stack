@@ -62,3 +62,42 @@ If you are using the default configuration, just create a `dump.sql` file in the
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/MiniCodeMonkey/vagrant-lamp-stack/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
+installer provisionning:
+
+plugin vagrant:
+============================================
+
+vagrant-berkshelf
+---------------------------------------------
+	vagrant plugin install vagrant-berkshelf
+
+vagrant-omnibus
+--------------------------------------------
+	vagrant plugin install vagrant-omnibus
+
+vagrant-hostmanager
+--------------------------------------------
+	vagrant plugin install vagrant-hostmanager
+
+
+creer fichier Berksfile
+	site :opscode
+	cookbook "apt"
+	cookbook "apache2"
+
+modifier vagrantfile
+
+	config.berkshelf.enabled = true
+	config.vm.provision :chef_solo do |chef|
+	chef.add_recipe "apt"
+	chef.add_recipe "apache2"
+	end
+
+lancer vagrant 
+	vagrant up
+
+maj provision
+	vagrant provision
+
+connect ssh
+	vagrant ssh
